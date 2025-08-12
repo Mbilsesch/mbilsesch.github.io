@@ -171,8 +171,7 @@ footer {
 <script>
   // 模拟网站数据
   const sites = [
-    { title: "Mbilse Care - 随处构建，部署，连接和使用", url: "https://mbilse001.github.io" },
-    { title: "Mbilse Care - Build,deploy,connect and use anywhere.", url: "https://mbilse001.github.io/en" }
+    { title: "404", url: "Page-not-found" }
   ];
 
   const resultsEl = document.getElementById("results");
@@ -208,7 +207,7 @@ footer {
       url.textContent = site.url;
 
       const btn = document.createElement('button');
-      btn.textContent = 'View';
+      btn.textContent = 'Error404';
       btn.onclick = () => window.open(site.url, '_blank');
 
       card.appendChild(title);
@@ -231,7 +230,7 @@ footer {
     searchInput.addEventListener('keydown', e => {
       if(e.key === 'Enter') {
         const val = searchInput.value.trim();
-        const url = val ? `?q=${encodeURIComponent(val)}` : window.location.pathname;
+        const url = val ? `./search/?q=${encodeURIComponent(val)}` : window.location.pathname;
         window.location.href = url;
       }
     });
