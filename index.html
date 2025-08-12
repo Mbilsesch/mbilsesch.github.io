@@ -50,6 +50,14 @@
     border-color: #1a73e8;
     box-shadow: 0 0 8px rgba(26, 115, 232, 0.4);
   }
+  footer {
+    text-align: center;
+    padding: 14px 10px;
+    font-size: 0.85rem;
+    color: #5f6368;
+    border-top: 1px solid #e0e0e0;
+    user-select: none;
+  }
 </style>
 </head>
 <body>
@@ -59,7 +67,9 @@
 <form action="./search" method="get" onsubmit="return submitForm(event)">
   <input type="search" name="q" placeholder="Search..." autocomplete="off" autofocus />
 </form>
-
+<footer>
+  © 2025 Mbilse All right reserved.
+</footer>
 <script>
   function submitForm(e) {
     const input = e.target.q;
