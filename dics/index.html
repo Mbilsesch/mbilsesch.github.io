@@ -1,5 +1,92 @@
 <!DOCTYPE html>
 <link rel="stylesheet" src="./styles.css"/>
 <html>
-小梅词条
+<body>
+
+<header>
+  <h1>Startpage</h1>
+  <input type="text" id="searchInput" placeholder="Search..." />
+</header>
+
+<main id="results">
+  <!-- 搜索结果卡片 -->
+</main>
+
+<footer>
+  © 2025 Mbilse All right reserved.
+</footer>
+
+<script>
+  // 模拟网站数据
+  const sites = [
+{ title: "小梅词库", url: "./" }
+  ];
+
+  const resultsEl = document.getElementById("results");
+  const searchInput = document.getElementById("searchInput");
+
+  // 读取url中的q参数
+  function getQueryKeyword() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('q') || '';
+  }
+
+  // 渲染卡片
+  function renderResults(keyword) {
+    const lower = keyword.toLowerCase();
+    resultsEl.innerHTML = '';
+    const filtered = sites.filter(site =>
+      site.title.toLowerCase().includes(lower) || site.url.toLowerCase().includes(lower)
+    );
+    if(filtered.length === 0) {
+      resultsEl.innerHTML = `<p>-  没有找到匹配的结果  -</p>`;
+      return;
+    }
+    for (const site of filtered) {
+      const card = document.createElement('div');
+      card.className = 'card';
+
+      const title = document.createElement('div');
+      title.className = 'card-title';
+      title.textContent = site.title;
+
+      const url = document.createElement('div');
+      url.className = 'card-url';
+      url.textContent = site.url;
+
+      const btn = document.createElement('button');
+      btn.textContent = 'View';
+      btn.onclick = () => window.open(site.url, '_blank');
+
+      card.appendChild(title);
+      card.appendChild(url);
+      card.appendChild(btn);
+
+      resultsEl.appendChild(card);
+    }
+  }
+
+  // 初始化
+  function init() {
+    const keyword = getQueryKeyword();
+    searchInput.value = keyword;
+    searchInput.placeholder = keyword ? keyword : "Search";
+
+    renderResults(keyword);
+
+    // 输入回车跳转到新的url
+    searchInput.addEventListener('keydown', e => {
+      if(e.key === 'Enter') {
+        const val = searchInput.value.trim();
+        const url = val ? `?q=${encodeURIComponent(val)}` : window.location.pathname;
+        window.location.href = url;
+      }
+    });
+  }
+
+  init();
+</script>
+
+</body>
+
 </html>
